@@ -28,8 +28,10 @@ nvram set script_fire='/opt/ftgfw-router/firewall.sh'
 nvram set script_wanup='/opt/ftgfw-router/wan_up.sh'
 nvram set dnsmasq_custom='strict-order
 conf-dir=/opt/ftgfw-router/gfwlist2dnsmasq-rb/dnsmasq.d'
-
 nvram commit
+
+# Update gfwlist2dnsmasq-rb
+/opt/ftgfw-router/update_gfwlist.sh
 
 # Done!
 echo 'Installation complete, rebooting...'
