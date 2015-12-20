@@ -6,16 +6,17 @@ umount /dev/sda?
 echo -e "o\nn\np\n1\n\n+500M\nw" | fdisk /dev/sda
 umount /dev/sda?
 mkfs.ext3 -L ENTWARE /dev/sda1
+sleep 2
 umount /dev/sda?
 mount /opt
 
 # Install entware
-entware-install.sh
+wget -O - http://pkg.entware.net/binaries/mipsel/installer/installer.sh | sh
 
 # Install packages
 opkg update
-opkg install bash vim openssh-sftp-server ruby ruby-enc-extra \
-ruby-net ruby-openssl ruby-optparse ruby-yaml git git-http ca-certificates shadowsocks-libev
+opkg install bash vim openssh-sftp-server bind-dig ruby ruby-enc-extra \
+ruby-net ruby-openssl ruby-optparse ruby-yaml perl git git-http ca-certificates shadowsocks-libev
 
 # Config
 git clone --recursive https://github.com/mklnz/ftgfw-router.git /opt/ftgfw-router
