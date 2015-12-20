@@ -1,8 +1,0 @@
-- include: bootstrap.yml
-  tags: [bootstrap]
-
-- include: packages.yml
-  tags: [packages]
-
-- include: setup.yml
-  tags: [setup]

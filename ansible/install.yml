@@ -1,6 +1,0 @@
-- hosts: routers
-  gather_facts: False
-  vars_files:
-    - 'defaults/main.yml'
-  roles:
-    - router
