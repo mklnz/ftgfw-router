@@ -1,0 +1,3 @@
+[submodule "gfwlist2dnsmasq-rb"]
+	path = gfwlist2dnsmasq-rb
+	url = https://github.com/mklnz/gfwlist2dnsmasq-rb.git

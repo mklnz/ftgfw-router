@@ -1,0 +1,27 @@
+- name: Remove SSH connection limit
+  raw: iptables -D INPUT -p tcp --dport 22 -m state --state NEW -j shlimit
+  ignore_errors: yes
+
+- name: Partition USB drive
+  raw: umount /dev/sda1 && echo -e "o\nn\np\n1\n\n+100M\nw" | fdisk /dev/sda
+
+- name: Format USB drive
+  raw: umount /dev/sda1 && mkfs.ext3 -L ENTWARE /dev/sda1
+
+- name: Update fstab
+  raw: echo "LABEL=ENTWARE /opt ext3 rw,noatime 1 1" >> /etc/fstab
+
+- name: Mount USB
+  raw: mount /opt
+
+- name: Install entware
+  raw: entware-install.sh
+
+- name: Update entware
+  raw: opkg update
+
+- name: Install base packages
+  raw: opkg install python openssh-sftp-server
+
+- name: Gather facts
+  setup:

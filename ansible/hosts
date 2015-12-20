@@ -1,0 +1,5 @@
+[routers]
+10.2.2.60
+
+[routers:vars]
+ansible_python_interpreter=/opt/bin/python

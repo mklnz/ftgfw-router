@@ -1,0 +1,29 @@
+- name: Clone repo
+
+- name: Upload config scripts
+  template: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: 'gfwlist2dnsmasq.yml.j2', dest: '/opt/ftgfw-router/config/gfwlist2dnsmasq.yml' }
+    - { src: 'shadowsocks.json.j2', dest: '/opt/ftgfw-router/config/shadowsocks.json' }
+
+- name: Upload wan script
+  template: src=wan_up.sh.j2 dest=/opt/ftgfw-router/wan_up.sh mode=0755
+
+- name: Set USB mounting scripts
+  command: "{{ item }}"
+  with_items:
+    - nvram set script_usbmount='/opt/ftgfw-router/usb-mount.sh'
+    - nvram set script_usbumount='/opt/ftgfw-router/usb_unmount.sh'
+
+- name: Set init/firewall/dns scripts
+  command: "{{ item }}"
+  with_items:
+    - nvram set script_init='echo "LABEL=ENTWARE /opt ext3 rw,noatime 1 1" >> /etc/fstab'
+    - nvram set script_fire='/opt/ftgfw-router/firewall.sh'
+    - nvram set script_wanup='/opt/ftgfw-router/wan_up.sh'
+    - |
+      nvram set dnsmasq_custom='strict-order
+      conf-dir=/opt/ftgfw-router/gfwlist2dnsmasq/dnsmasq.d'
+
+- name: Reboot
+  command: reboot
