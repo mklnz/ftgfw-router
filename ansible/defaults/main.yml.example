@@ -1,4 +1,4 @@
-ftgfw-router:
+ftgfw_router:
   repo_url: https://github.com/mklnz/ftgfw-router.git
 
 shadowsocks:

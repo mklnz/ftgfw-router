@@ -3,7 +3,7 @@
   ignore_errors: yes
 
 - name: Partition USB drive
-  raw: umount /dev/sda1 && echo -e "o\nn\np\n1\n\n+100M\nw" | fdisk /dev/sda
+  raw: echo -e "o\nn\np\n1\n\n+500M\nw" | fdisk /dev/sda
 
 - name: Format USB drive
   raw: umount /dev/sda1 && mkfs.ext3 -L ENTWARE /dev/sda1
